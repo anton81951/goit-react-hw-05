@@ -1,0 +1,13 @@
+.galleryShape {
+    margin: 0 auto;
+    text-decoration: none;
+    list-style-type: none;
+    margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+  gap:20px;
+}
