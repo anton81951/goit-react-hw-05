@@ -1,0 +1,22 @@
+.menuOrder {
+    display: flex;
+    gap:20px;
+    text-decoration: none;
+    list-style: none;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.linkClass {
+    text-decoration: none;
+
+}
+
+.linkClass:hover,
+.linkClass:focus {
+    text-decoration: underline;
+}
+
+.activeLink {
+    color: red;
+}
