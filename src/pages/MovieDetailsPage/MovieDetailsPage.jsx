@@ -16,7 +16,7 @@ const MovieDetailsPage = () => {
     const [error, setError] = useState(null);
 
     const location = useLocation();
-    const backLinkRef = useRef(location.state ?? '/movies');
+    const backLinkRef = useRef(location.state ?? '/');
   
     useEffect(() => {
       setLoading(true);

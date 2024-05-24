@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import MovieList from "../../components/MovieList/MovieList";
 import MoviesForm from '../../components/MoviesForm/MoviesForm';
-import { fetchTrendingMovies, searchMovie } from '../../movies-api';
+import { searchMovie } from '../../movies-api';
 import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
@@ -18,7 +18,7 @@ const MoviesPage = () => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    if (movieFilter.trim() !== '') {
+    
       searchMovie(movieFilter)
         .then(data => {
           setMovies(data);
@@ -28,17 +28,6 @@ const MoviesPage = () => {
           setError(err);
           setLoading(false);
         });
-    } else {
-      fetchTrendingMovies()
-        .then(data => {
-          setMovies(data);
-          setLoading(false);
-        })
-        .catch(err => {
-          setError(err);
-          setLoading(false);
-        });
-    }
   }, [movieFilter]);
 
   return (
