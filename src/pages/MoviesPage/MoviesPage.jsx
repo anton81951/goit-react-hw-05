@@ -1,11 +1,54 @@
-import MovieList from "../../components/MovieList/MovieList ";
+import { useEffect, useState } from 'react';
+import MovieList from "../../components/MovieList/MovieList";
+import MoviesForm from '../../components/MoviesForm/MoviesForm';
+import { fetchTrendingMovies, searchMovie } from '../../movies-api';
+import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
-    return (
-      <>
-        <MovieList />
-      </>
-    );
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const movieFilter = searchParams.get('movie') ?? '';
+
+  const changeMovieFilter = newFilter => {
+    setSearchParams({ movie: newFilter });
   };
-  
-  export default MoviesPage;
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    if (movieFilter.trim() !== '') {
+      searchMovie(movieFilter)
+        .then(data => {
+          setMovies(data);
+          setLoading(false);
+        })
+        .catch(err => {
+          setError(err);
+          setLoading(false);
+        });
+    } else {
+      fetchTrendingMovies()
+        .then(data => {
+          setMovies(data);
+          setLoading(false);
+        })
+        .catch(err => {
+          setError(err);
+          setLoading(false);
+        });
+    }
+  }, [movieFilter]);
+
+  return (
+    <div>
+      <MoviesForm filter={movieFilter} onSearch={changeMovieFilter} />
+      {loading && <div>Loading movies...</div>}
+      {error && <div>Error: {error.message}</div>}
+      {!loading && !error && <MovieList movies={movies} />}
+    </div>
+  );
+};
+
+export default MoviesPage;

@@ -1,40 +1,14 @@
-import { useEffect, useState } from 'react';
-import { fetchTrendingMovies } from '../../movies-api';
 import { NavLink } from 'react-router-dom';
+import css from "./MovieList.module.css";
 
-const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const getMovies = async () => {
-      try {
-        const movies = await fetchTrendingMovies();
-        setMovies(movies);
-        setLoading(false);
-        console.log(movies);
-      } catch (err) {
-        setError(err);
-        setLoading(false);
-      }
-    };
-
-    getMovies();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
+const MovieList = ({ movies }) => {
+  if (!movies || movies.length === 0) {
+    return <div>No movies available</div>;
   }
 
   return (
     <div>
-      <h1>Trending today</h1>
-      <ul>
+      <ul className={css.moviesList}>
         {movies.map(movie => (
           <li key={movie.id}>
             <NavLink to={`/movies/${movie.id}`}>

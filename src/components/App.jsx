@@ -10,7 +10,6 @@ const MoviesPage = lazy(() => import('../pages/MoviesPage/MoviesPage.jsx'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage.jsx'));
 const MovieCast = lazy(() => import('./MovieCast/MovieCast.jsx'));
 const MovieReviews = lazy(() => import('../components/MovieReviews/MovieReviews.jsx'));
-const MovieForm = lazy(() => import('./MoviesForm/MoviesForm.jsx'));
 
 export const App = () => {
   return (

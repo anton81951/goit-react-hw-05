@@ -1,0 +1,13 @@
+.imageFrame {
+    max-width: 200px;
+    display: block;
+}
+
+.bold {
+    font-weight: 600px;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+}
