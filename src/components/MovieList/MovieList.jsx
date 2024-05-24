@@ -13,11 +13,10 @@ const MovieList = ({ movies }) => {
       <ul className={css.moviesList}>
         {movies.map(movie => (
           <li key={movie.id}>
-            <NavLink
-              to={{
-                pathname: `/movies/${movie.id}`,
-                state: { from: location }
-              }}
+          <NavLink
+              to={
+               `/movies/${movie.id}`}
+                state={location }
             >
               <h2>{movie.title}</h2>
             </NavLink>
